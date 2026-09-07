@@ -1,0 +1,16 @@
+environment:
+  width: 1000
+  height: 1000
+
+agents:
+  - id: agent-1
+    x: 100
+    y: 100
+    speed: 10
+    heading: 0
+
+  - id: agent-2
+    x: 500
+    y: 500
+    speed: 20
+    heading: 180
