@@ -1,0 +1,62 @@
+schema_version: 1
+environment:
+  width: 1000
+  height: 700
+simulation:
+  duration: 120
+  dt: 0.25
+  seed: 42
+mission:
+  observer_ids: [explorer]
+  target_ids: [opposing-patrol]
+communication_links:
+  - sender_id: explorer
+    recipient_id: responder
+    range: 650
+    latency: 1.5
+    loss_probability: 0.15
+    queue_capacity: 8
+    ttl: 6
+agents:
+  - id: explorer
+    affiliation: friendly
+    x: 180
+    y: 200
+    heading: 0
+    sensors:
+      - id: forward
+        range: 260
+        field_of_view: 110
+        period: 1
+        probability_of_detection: 0.85
+        position_std: 3
+    policy:
+      kind: patrol
+      speed: 20
+      waypoints:
+        - {x: 700, y: 200}
+        - {x: 700, y: 500}
+        - {x: 180, y: 500}
+        - {x: 180, y: 200}
+  - id: responder
+    affiliation: friendly
+    x: 100
+    y: 100
+    policy:
+      kind: react
+      speed: 25
+      reaction: approach
+      reaction_distance: 900
+      max_observation_age: 5
+      use_messages: true
+  - id: opposing-patrol
+    affiliation: hostile
+    x: 550
+    y: 220
+    policy:
+      kind: patrol
+      speed: 12
+      waypoints:
+        - {x: 800, y: 300}
+        - {x: 600, y: 500}
+        - {x: 450, y: 200}

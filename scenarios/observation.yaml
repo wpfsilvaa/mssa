@@ -1,0 +1,60 @@
+schema_version: 1
+
+simulation:
+  duration: 20
+  dt: 0.25
+  seed: 42
+
+environment:
+  width: 1000
+  height: 1000
+
+mission:
+  kind: observe_targets
+  observer_ids: [scout-1, scout-2]
+  target_ids: [opposing-patrol-1, stationary-system-1]
+
+agents:
+  - id: scout-1
+    affiliation: friendly
+    x: 100
+    y: 200
+    speed: 10
+    heading: 0
+    sensors:
+      - id: forward-sensor
+        range: 150
+        field_of_view: 90
+        period: 1
+        probability_of_detection: 0.65
+        position_std: 3
+  - id: scout-2
+    affiliation: friendly
+    x: 100
+    y: 400
+    speed: 10
+    heading: 0
+    sensors:
+      - id: forward-sensor
+        range: 150
+        field_of_view: 90
+        period: 1
+        probability_of_detection: 0.65
+        position_std: 3
+  - id: opposing-patrol-1
+    affiliation: hostile
+    x: 350
+    y: 200
+    speed: 5
+    heading: 180
+    sensors:
+      - id: opposing-sensor
+        range: 120
+        field_of_view: 120
+        period: 2
+        probability_of_detection: 0.8
+        position_std: 5
+  - id: stationary-system-1
+    affiliation: hostile
+    x: 435
+    y: 400

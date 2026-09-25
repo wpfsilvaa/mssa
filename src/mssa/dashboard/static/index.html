@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MSSA · Laboratório de simulação</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><div class="brand-mark">M</div><div><strong>MSSA <span>LAB</span></strong><small>Missões & análise de sistemas</small></div></div>
+    <div class="scenario-tools"><select id="examples" aria-label="Abrir cenário de exemplo"><option value="">Cenários de exemplo</option></select><button id="new">Novo cenário</button><button id="import">Importar</button><button id="export">Exportar YAML</button><input id="file" type="file" accept=".yaml,.yml,.json" hidden></div>
+    <span class="local-badge"><i></i> Ambiente local</span>
+  </header>
+  <div id="notice" role="status" aria-live="polite" hidden></div>
+  <div class="workspace">
+    <aside class="sidebar">
+      <div class="section-title"><div><span class="eyebrow">CENÁRIO</span><h2>Agentes <span id="agent-count">0</span></h2></div><button id="add-agent" class="icon-button" title="Adicionar agente" aria-label="Adicionar agente">+</button></div>
+      <div id="agent-list" class="agent-list"></div>
+      <div class="world-settings"><span class="eyebrow">AMBIENTE & EXECUÇÃO</span><div id="world-fields" class="field-grid"></div><p class="hint">Metros · segundos · graus<br>0° aponta para a direita; 90° para cima.</p></div>
+      <div class="sidebar-foot"><span class="status-dot"></span><span id="status-label">Preparando simulação</span></div>
+    </aside>
+    <main class="main-panel">
+      <section class="execution-bar">
+        <div class="transport"><button id="play" class="primary">▶ Executar</button><button id="step" title="Avançar um passo">Passo →</button><button id="reset" title="Reiniciar com o cenário atual">↺ Reiniciar</button><select id="speed" aria-label="Velocidade de reprodução"><option value="1">1×</option><option value="2">2×</option><option value="4">4×</option><option value="8">8×</option></select></div>
+        <div class="clock"><span>TEMPO SIMULADO</span><strong id="time">0.00 <small>s</small></strong></div>
+      </section>
+      <div class="stats"><div><span>DETECÇÕES</span><strong id="detections">0</strong></div><div><span>ENVIADAS</span><strong id="sent">0</strong></div><div><span>ENTREGUES</span><strong id="delivered">0</strong></div><div><span>EM TRÂNSITO</span><strong id="pending">0</strong></div><div><span>MISSÃO</span><strong id="mission">Sem missão</strong></div></div>
+      <section class="map-panel">
+        <div class="map-heading"><div><span class="eyebrow">ESPAÇO DE SIMULAÇÃO</span><h1 id="map-title">Visão do mundo</h1></div><button id="fit">Enquadrar</button></div>
+        <div class="layers"><label><input id="layer-sensors" type="checkbox" checked>Sensores</label><label><input id="layer-radio" type="checkbox" checked>Comunicação</label><label><input id="layer-routes" type="checkbox" checked>Rotas</label><label><input id="layer-trails" type="checkbox" checked>Trajetórias</label><label class="perspective"><input id="local-view" type="checkbox">Percepção do selecionado</label></div>
+        <div id="canvas-wrap"><canvas id="map" aria-label="Mapa interativo dos agentes, sensores, rotas e mensagens"></canvas><div id="map-mode" hidden></div><div class="map-help">Clique para selecionar · arraste para mover o mapa · use a roda para zoom</div></div>
+        <div class="legend"><span><i class="friendly"></i>Aliado</span><span><i class="hostile"></i>Adversário</span><span><i class="neutral"></i>Neutro</span><span><i class="message"></i>Mensagem em trânsito</span><span class="unit-label" id="map-coordinates">Coordenadas em metros</span></div>
+      </section>
+      <section class="events-panel"><div class="events-heading"><h2>Tráfego de mensagens <span id="event-count">0 eventos</span></h2><button id="export-state">Exportar estado</button></div><div id="events" role="log" aria-label="Eventos de comunicação"><p class="empty">Execute a simulação para acompanhar os envios e as entregas.</p></div></section>
+    </main>
+    <aside class="inspector">
+      <div class="inspector-heading"><span class="eyebrow">CONFIGURAÇÃO</span><h2>Editor de cenário</h2><p>Edite, aplique e explore o resultado.</p></div>
+      <div class="tabs" role="tablist" aria-label="Seções do editor"><button data-tab="agent" class="active" role="tab" aria-selected="true">Agente</button><button data-tab="links" role="tab" aria-selected="false">Enlaces</button><button data-tab="scenario" role="tab" aria-selected="false">Cenário</button></div>
+      <div id="live-info" class="live-info"></div>
+      <div id="editor" class="editor"></div>
+      <div class="apply-area"><p id="dirty-label">Cenário aplicado</p><button id="apply" class="primary">Aplicar cenário</button><small>Aplicar reinicia o tempo e os estados.</small></div>
+    </aside>
+  </div>
+</body>
+</html>

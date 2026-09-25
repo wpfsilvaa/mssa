@@ -1,0 +1,51 @@
+schema_version: 1
+
+simulation:
+  duration: 12
+  dt: 0.25
+  seed: 42
+
+environment:
+  width: 1000
+  height: 1000
+
+mission:
+  observer_ids: [scout]
+  target_ids: [opposing-patrol]
+
+# Links are directed; there is no automatic same-team broadcast or relay.
+communication_links:
+  - sender_id: scout
+    recipient_id: coordinator
+    range: 200
+    latency: 0.75
+    loss_probability: 0.2
+    queue_capacity: 4
+    ttl: 3
+
+agents:
+  - id: scout
+    affiliation: friendly
+    x: 100
+    y: 100
+    sensors:
+      - id: forward
+        range: 150
+        field_of_view: 90
+        period: 0.5
+        probability_of_detection: 0.8
+        position_std: 2
+  - id: coordinator
+    affiliation: friendly
+    x: 50
+    y: 100
+  - id: opposing-patrol
+    affiliation: hostile
+    x: 220
+    y: 100
+    speed: 2
+    heading: 180
+  - id: unconnected-ally
+    affiliation: friendly
+    x: 50
+    y: 150

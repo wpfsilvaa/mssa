@@ -1,0 +1,35 @@
+schema_version: 1
+
+simulation:
+  duration: 30
+  dt: 0.5
+  seed: 42
+
+environment:
+  width: 2000
+  height: 2000
+
+# Affiliation identifies teams; sensing and team-specific policies are planned.
+agents:
+  - id: scout-1
+    affiliation: friendly
+    x: 100
+    y: 200
+    speed: 12
+    heading: 30
+  - id: relay-1
+    affiliation: friendly
+    x: 200
+    y: 400
+    speed: 5
+    heading: 0
+  - id: opposing-patrol-1
+    affiliation: hostile
+    x: 1500
+    y: 1200
+    speed: 8
+    heading: 180
+  - id: stationary-system-1
+    affiliation: hostile
+    x: 1100
+    y: 900

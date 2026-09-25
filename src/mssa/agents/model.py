@@ -9,6 +9,7 @@ class Agent:
     y: float
     speed: float = 0.0
     heading: float = 0.0
+    affiliation: str = "friendly"
 
     def move(self, dt: float) -> None:
         if dt <= 0:
